@@ -1,12 +1,11 @@
 import json
 from base64 import b64decode, b64encode
-from functools import wraps
 
 import numpy as np
 from numpy.lib.format import dtype_to_descr, descr_to_dtype
 
 
-def json_numpy_default(obj):
+def default(obj):
     if isinstance(obj, (np.ndarray, np.generic)):
         return {
             '__numpy__': b64encode(obj.data if obj.flags.c_contiguous else obj.tobytes()).decode('ascii'),
@@ -16,7 +15,7 @@ def json_numpy_default(obj):
     raise TypeError(f'Object of type {type(obj)} is not JSON serializable')
 
 
-def json_numpy_obj_hook(dct):
+def object_hook(dct):
     if '__numpy__' in dct:
         np_obj = np.frombuffer(b64decode(dct['__numpy__']), descr_to_dtype(dct['dtype']))
         shape = dct['shape']
@@ -30,27 +29,23 @@ _dump = json.dump
 _load = json.load
 
 
-@wraps(_dumps)
 def dumps(*args, **kwargs):
-    kwargs.setdefault('default', json_numpy_default)
+    kwargs.setdefault('default', default)
     return _dumps(*args, **kwargs)
 
 
-@wraps(_loads)
 def loads(*args, **kwargs):
-    kwargs.setdefault('object_hook', json_numpy_obj_hook)
+    kwargs.setdefault('object_hook', object_hook)
     return _loads(*args, **kwargs)
 
 
-@wraps(_dump)
 def dump(*args, **kwargs):
-    kwargs.setdefault('default', json_numpy_default)
+    kwargs.setdefault('default', default)
     return _dump(*args, **kwargs)
 
 
-@wraps(_load)
 def load(*args, **kwargs):
-    kwargs.setdefault('object_hook', json_numpy_obj_hook)
+    kwargs.setdefault('object_hook', object_hook)
     return _load(*args, **kwargs)
 
 
