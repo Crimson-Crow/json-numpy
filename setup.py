@@ -6,7 +6,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='json-numpy',
-    version='1.0.0a1',
+    version='1.0.1a1',
     description='JSON encoding/decoding for Numpy arrays and scalars',
     long_description=long_description,
     long_description_content_type="text/markdown",
