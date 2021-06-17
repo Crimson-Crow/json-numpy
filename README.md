@@ -1,6 +1,10 @@
 json-numpy
 ==========
 
+[![PyPI](https://img.shields.io/pypi/v/json-numpy)](https://pypi.org/project/json-numpy/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/json-numpy)](https://pypi.org/project/json-numpy/)
+[![GitHub](https://img.shields.io/github/license/Crimson-Crow/json-numpy)]((https://github.com/Crimson-Crow/json-numpy/blob/main/LICENSE.txt))
+
 Description
 -----------
 
@@ -20,7 +24,7 @@ Alternatively, you can download the repository and run the following command fro
 Usage
 -----
 
-For a quick start, `json_numpy` can be used as a basic drop-in replacement of the built-in `json` module. \
+For a quick start, `json_numpy` can be used as a simple drop-in replacement of the built-in `json` module. \
 The `dump()`, `load()`, `dumps()` and `loads()` methods are implemented by wrapping the original methods and replacing the default encoder and decoder. \
 More information on the usage can be found in the `json` module's [documentation](https://docs.python.org/3/library/json.html).
 
@@ -60,27 +64,24 @@ decoded_arr = json.loads(encoded_arr_str)
 
 This method can be used to change the behavior of a module depending on the `json` module without editing its code.
 
-Development
------------
-The latest source code can be obtained from [GitHub](https://github.com/Crimson-Crow/json-numpy).
+Tests
+-----
 
-`json-numpy` maintains compatibility with python versions >= 3.6.
+The simplest way to run tests:
 
-Install [`tox`](https://tox.readthedocs.io/en/latest/) to support testing across multiple python versions in your development environment.
-If you use [`conda`](https://docs.conda.io/en/latest/) to install `python` use [`tox-conda`](https://github.com/tox-dev/tox-conda) to automatically manage
-testing across all supported python versions.
-    
-    # Using a system python
-    $ pip install tox
+    $ pip install -r requirements.txt
+    $ python tests.py
 
-    # Additionally, using a conda-provided python
-    $ pip install tox tox-conda
+As a more robust alternative, you can install [`tox`](https://tox.readthedocs.io/en/latest/) (or [`tox-conda`](https://github.com/tox-dev/tox-conda) if you use [`conda`](https://docs.conda.io/en/latest/)) to automatically support testing across the supported python versions:
 
-Execute tests across supported python versions:
-    
     $ tox
+
+Issue tracker
+-------------
+
+Please report any bugs and enhancement ideas using the [issue tracker](https://github.com/Crimson-Crow/json-numpy/issues).
 
 License
 -------
 
-`json-numpy` is licensed under the terms of the [MIT License](https://opensource.org/licenses/MIT) (see the file [LICENSE.txt](https://github.com/Crimson-Crow/json-numpy/blob/main/LICENSE.txt) for more information).
+`json-numpy` is licensed under the terms of the [MIT License](https://opensource.org/licenses/MIT) (see [LICENSE.txt](https://github.com/Crimson-Crow/json-numpy/blob/main/LICENSE.txt) for more information).
