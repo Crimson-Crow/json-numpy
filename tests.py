@@ -1,5 +1,6 @@
 import json
 import unittest
+from io import StringIO
 
 import numpy as np
 from numpy.testing import assert_equal, assert_array_equal
@@ -37,15 +38,20 @@ class NumpyJsonSerializationTest(unittest.TestCase):
             assert_equal(actual, desired)
             assert_equal(type(actual), type(desired))
 
+    def test_dump_load(self):
+        x = [np.float32(np.random.rand()) for _ in range(5)]
+        buff = StringIO()
+        json.dump(x, buff)
+        buff.seek(0)
+        self.assert_equal_with_type(json.load(buff), x)
+
+    def test_typeerror_on_cannot_encode(self):
+        self.assertRaises(TypeError, json.dumps, b'abc')
+
     def test_numpy_scalar_bool(self):
         for b in (True, False):
             x = np.bool_(b)
             self.assert_equal_with_type(self.dumps_loads(x), x)
-
-    @unittest.skip("np.str_ is a subclass of str and get automatically serialized as such")
-    def test_numpy_scalar_str(self):
-        x = np.str_("abc")
-        self.assert_equal_with_type(self.dumps_loads(x), x)
 
     def test_numpy_scalar_float(self):
         x = np.float32(np.random.rand())
@@ -57,11 +63,6 @@ class NumpyJsonSerializationTest(unittest.TestCase):
 
     def test_list_numpy_scalar_bool(self):
         x = [np.bool_(True), np.bool_(False)]
-        self.assert_equal_with_type(self.dumps_loads(x), x)
-
-    @unittest.skip("np.str_ is a subclass of str and get automatically serialized as such")
-    def test_list_numpy_scalar_str(self):
-        x = [np.str_("abc"), np.str_("cba")]
         self.assert_equal_with_type(self.dumps_loads(x), x)
 
     def test_list_numpy_scalar_float(self):
@@ -147,7 +148,3 @@ class NumpyJsonSerializationTest(unittest.TestCase):
         x["bar"]["b"] = np.arange(10) + 10
 
         self.assert_equal_with_type(self.dumps_loads(x), x)
-
-
-if __name__ == '__main__':
-    unittest.main()
