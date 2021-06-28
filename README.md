@@ -8,7 +8,7 @@ json-numpy
 Description
 -----------
 
-This package provides lossless and quick JSON encoding/decoding for [`numpy`](http://www.numpy.org/) arrays and scalars.
+`json-numpy` provides lossless and quick JSON encoding/decoding for [`numpy`](http://www.numpy.org/) arrays and scalars.
 
 Installation
 ------------
@@ -72,7 +72,7 @@ The simplest way to run tests:
     $ pip install -r requirements.txt
     $ python tests.py
 
-As a more robust alternative, you can install [`tox`](https://tox.readthedocs.io/en/latest/) (or [`tox-conda`](https://github.com/tox-dev/tox-conda) if you use [`conda`](https://docs.conda.io/en/latest/)) to automatically support testing across the supported python versions:
+As a more robust alternative, you can install [`tox`](https://tox.readthedocs.io/en/latest/install.html) (or [`tox-conda`](https://github.com/tox-dev/tox-conda) if you use [`conda`](https://docs.conda.io/en/latest/)) to automatically support testing across the supported python versions, then run:
 
     $ tox
 
