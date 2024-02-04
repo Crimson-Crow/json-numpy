@@ -1,3 +1,69 @@
 [build-system]
-requires = ["setuptools>=40.8.0", "wheel"]
+requires = ["setuptools>=64", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "json-numpy"
+description = "JSON encoding/decoding for Numpy arrays and scalars"
+authors = [{ name = "Crimson-Crow", email = "github@crimsoncrow.dev" }]
+maintainers = [{ name = "Crimson-Crow", email = "github@crimsoncrow.dev" }]
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE.txt" }
+keywords = ["json", "numpy", "serialization", "encode", "decode", "encoding", "decoding"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Operating System :: OS Independent",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Utilities",
+]
+dependencies = ["numpy"]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/Crimson-Crow/json-numpy"
+Repository = "https://github.com/Crimson-Crow/json-numpy.git"
+Issues = "https://github.com/Crimson-Crow/json-numpy/issues"
+
+[tool.setuptools]
+py-modules= ["json_numpy"]
+
+[tool.setuptools.dynamic]
+version = { attr = "json_numpy.__version__" }
+
+[tool.setuptools_scm]
+
+[tool.check-manifest]
+ignore = [".pre-commit-config.yaml"]
+
+[tool.ruff]
+target-version = "py38"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["PT027", "NPY002", "D100", "D101", "D102", "D103", "D104", "D105", "D106", "D107", "ANN101", "ANN401", "COM812", "ISC001"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+python_version = "3.8"
+
+[tool.coverage.run]
+branch = true
+source = ["json_numpy", "tests"]
+parallel = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 100

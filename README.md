@@ -13,13 +13,9 @@ Description
 Installation
 ------------
 
-`json-numpy` can be installed using [`pip`](http://www.pip-installer.org/):
+`json-numpy` can be installed using [`pip`](https://pip.pypa.io/en/stable/):
 
     $ pip install json-numpy
-
-Alternatively, you can download the repository and run the following command from within the source directory:
-
-    $ python setup.py install
 
 Usage
 -----
@@ -55,6 +51,7 @@ Finally, the last way of using `json_numpy` is by monkey patching the `json` mod
 import json
 import numpy as np
 import json_numpy
+
 json_numpy.patch()
 
 arr = np.array([0, 1, 2])
@@ -67,19 +64,18 @@ This method can be used to change the behavior of a module depending on the `jso
 Tests
 -----
 
-The simplest way to run tests:
+The simplest way to run tests is:
 
-    $ pip install -r requirements.txt
-    $ python tests.py
+    $ python -m unittest
 
-As a more robust alternative, you can install [`tox`](https://tox.readthedocs.io/en/latest/install.html) (or [`tox-conda`](https://github.com/tox-dev/tox-conda) if you use [`conda`](https://docs.conda.io/en/latest/)) to automatically support testing across the supported python versions, then run:
+As a more robust alternative, you can install [`tox`](https://tox.readthedocs.io/en/latest/install.html) to automatically test across the supported python versions, then run:
 
     $ tox
 
 Issue tracker
 -------------
 
-Please report any bugs and enhancement ideas using the [issue tracker](https://github.com/Crimson-Crow/json-numpy/issues).
+Please report any bugs or enhancement ideas using the [issue tracker](https://github.com/Crimson-Crow/json-numpy/issues).
 
 License
 -------
