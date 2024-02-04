@@ -4,11 +4,14 @@ json-numpy
 [![PyPI](https://img.shields.io/pypi/v/json-numpy)](https://pypi.org/project/json-numpy/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/json-numpy)](https://pypi.org/project/json-numpy/)
 [![GitHub](https://img.shields.io/github/license/Crimson-Crow/json-numpy)]((https://github.com/Crimson-Crow/json-numpy/blob/main/LICENSE.txt))
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
 
 Description
 -----------
 
-`json-numpy` provides lossless and quick JSON encoding/decoding for [`numpy`](http://www.numpy.org/) arrays and scalars.
+`json-numpy` provides lossless and quick JSON encoding/decoding for [NumPy](http://www.numpy.org/) arrays and scalars.
+
+`json-numpy` follows [Semantic Versioning](https://semver.org/).
 
 Installation
 ------------
