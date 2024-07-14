@@ -35,7 +35,7 @@ Repository = "https://github.com/Crimson-Crow/json-numpy.git"
 Issues = "https://github.com/Crimson-Crow/json-numpy/issues"
 
 [tool.setuptools]
-py-modules= ["json_numpy"]
+py-modules = ["json_numpy"]
 
 [tool.setuptools.dynamic]
 version = { attr = "json_numpy.__version__" }
@@ -49,8 +49,8 @@ ignore = [".pre-commit-config.yaml"]
 target-version = "py38"
 
 [tool.ruff.lint]
-select = ["ALL"]
-ignore = ["PT027", "NPY002", "D100", "D101", "D102", "D103", "D104", "D105", "D106", "D107", "ANN101", "ANN401", "COM812", "ISC001"]
+select = ["F", "E", "W", "C90", "I", "N", "D", "UP", "YTT", "ANN", "ASYNC", "S", "BLE", "FBT", "B", "COM", "C4", "DTZ", "T10", "EM", "FA", "ISC", "ICN", "LOG", "G", "INP", "PIE", "T20", "PYI", "PT", "Q", "RSE", "RET", "SLF", "SLOT", "SIM", "TID", "TCH", "INT", "ARG", "PTH", "FIX", "ERA", "PGH", "PL", "TRY", "FLY", "NPY", "PERF", "FURB", "RUF"]
+ignore = ["PT027", "PT009", "NPY002", "D100", "D101", "D102", "D103", "D104", "D105", "D106", "D107", "ANN101", "ANN401", "W191", "E111", "E114", "E117", "D206", "D300", "Q000", "Q001", "Q002", "Q003", "COM812", "COM819", "ISC001", "ISC002", "E501"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
