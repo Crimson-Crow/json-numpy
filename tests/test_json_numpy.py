@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import unittest
+import uuid
 from io import StringIO
 from typing import Any, TypeVar, cast
 
@@ -167,3 +168,56 @@ class NumpyJsonSerializationTest(unittest.TestCase):
         x["bar"]["b"] = np.arange(10) + 10
 
         self.assert_equal_with_type(self.dumps_loads(x), x)
+
+    def test_dumps_no_cls_with_default(self) -> None:
+        sentinel = {"sentinel": str(uuid.uuid4())}
+
+        def user_default(_: Any) -> dict[str, Any]:
+            return sentinel
+
+        dumped = json.dumps(b"unserializable", default=user_default)
+        self.assert_equal_with_type(json.loads(dumped), sentinel)
+
+        x = np.random.rand(5).astype(np.float32)
+        dumped = json.dumps(x, default=user_default)
+        self.assert_equal_with_type(json.loads(dumped), x)
+
+    def test_dumps_with_cls_with_default(self) -> None:
+        # The `default` kwargs always overrides the `default` method of the `cls`.
+        sentinel = {"sentinel": [37, 42]}
+
+        class Encoder(json.JSONEncoder):
+            def __init__(self, *args: Any, **kwargs: Any) -> None:
+                del kwargs["separators"]
+                super().__init__(*args, separators=(",  ", ":  "), **kwargs)
+
+            def default(self, _: Any) -> None:  # pragma: no cover
+                raise RuntimeError("Should never be called")  # noqa: TRY003, EM101
+
+        def user_default(_: Any) -> dict[str, Any]:
+            return sentinel
+
+        dumped = json.dumps(b"unserializable", default=user_default, cls=Encoder)
+        self.assertEqual(dumped, '{"sentinel":  [37,  42]}')
+
+        x = np.random.rand(5).astype(np.float32)
+        dumped = json.dumps(x, default=user_default, cls=Encoder)
+        self.assert_equal_with_type(json.loads(dumped), x)
+
+    def test_dumps_with_cls_no_default(self) -> None:
+        sentinel = {"sentinel": [37, 42]}
+
+        class Encoder(json.JSONEncoder):
+            def __init__(self, *args: Any, **kwargs: Any) -> None:
+                del kwargs["separators"]
+                super().__init__(*args, separators=(",  ", ":  "), **kwargs)
+
+            def default(self, _: Any) -> dict[str, Any]:
+                return sentinel
+
+        dumped = json.dumps(b"unserializable", cls=Encoder)
+        self.assertEqual(dumped, '{"sentinel":  [37,  42]}')
+
+        x = np.random.rand(5).astype(np.float32)
+        dumped = json.dumps(x, cls=Encoder)
+        self.assert_equal_with_type(json.loads(dumped), x)
