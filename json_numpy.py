@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 __all__ = ["default", "object_hook", "dumps", "loads", "dump", "load", "patch"]
 
 import json
