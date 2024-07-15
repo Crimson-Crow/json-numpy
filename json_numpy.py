@@ -6,10 +6,13 @@ __all__ = ["default", "object_hook", "dumps", "loads", "dump", "load", "patch"]
 import json
 from base64 import b64decode, b64encode
 from functools import partial
-from typing import Any, Callable
+from typing import TYPE_CHECKING, Any, Callable
 
 from numpy import frombuffer, generic, ndarray
 from numpy.lib.format import descr_to_dtype, dtype_to_descr
+
+if TYPE_CHECKING:  # pragma: no cover
+    from _typeshed import SupportsRead
 
 
 def default(
@@ -88,9 +91,16 @@ def dumps(*args: Any, cls: type[json.JSONEncoder] | None = None, **kwargs: Any) 
     return _dumps(*args, cls=_patch_encoder, **kwargs)  # type: ignore[arg-type]
 
 
-def loads(*args: Any, **kwargs: Any) -> Any:
-    kwargs.setdefault("object_hook", object_hook)
-    return _loads(*args, **kwargs)
+def loads(
+    *args: Any, object_hook: Callable[[dict], Any] | None = None, **kwargs: Any
+) -> Any:
+    return _loads(
+        *args,
+        object_hook=_hook
+        if object_hook is None
+        else lambda dct: _hook(object_hook(dct)),
+        **kwargs,
+    )
 
 
 def dump(*args: Any, cls: type[json.JSONEncoder] | None = None, **kwargs: Any) -> None:
@@ -98,9 +108,8 @@ def dump(*args: Any, cls: type[json.JSONEncoder] | None = None, **kwargs: Any) -
     return _dump(*args, cls=_patch_encoder, **kwargs)  # type: ignore[arg-type]
 
 
-def load(*args: Any, **kwargs: Any) -> Any:
-    kwargs.setdefault("object_hook", object_hook)
-    return _load(*args, **kwargs)
+def load(fp: SupportsRead[str | bytes], **kwargs: Any) -> Any:
+    return loads(fp.read(), **kwargs)
 
 
 def patch() -> None:

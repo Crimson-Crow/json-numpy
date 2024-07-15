@@ -221,3 +221,15 @@ class NumpyJsonSerializationTest(unittest.TestCase):
         x = np.random.rand(5).astype(np.float32)
         dumped = json.dumps(x, cls=Encoder)
         self.assert_equal_with_type(json.loads(dumped), x)
+
+    def test_loads_object_hook(self) -> None:
+        def hook(dct: dict) -> dict | int:
+            if "foo" in dct:
+                return dct["foo"]
+            return dct
+
+        foo = {"foo": "bar"}
+        x = np.random.rand(5).astype(np.float32)
+        result = json.loads(json.dumps([foo, x]), object_hook=hook)
+        self.assertEqual(result[0], "bar")
+        self.assert_equal_with_type(result[1], x)
