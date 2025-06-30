@@ -3,7 +3,7 @@ json-numpy
 
 [![PyPI](https://img.shields.io/pypi/v/json-numpy)](https://pypi.org/project/json-numpy/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/json-numpy)](https://pypi.org/project/json-numpy/)
-[![GitHub](https://img.shields.io/github/license/Crimson-Crow/json-numpy)]((https://github.com/Crimson-Crow/json-numpy/blob/main/LICENSE.txt))
+[![GitHub](https://img.shields.io/github/license/Crimson-Crow/json-numpy)](https://github.com/Crimson-Crow/json-numpy/blob/main/LICENSE.txt)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
 
 Description
