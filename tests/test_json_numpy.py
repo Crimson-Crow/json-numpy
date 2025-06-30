@@ -20,7 +20,7 @@ class NumpyJsonSerializationTest(unittest.TestCase):
 
     @staticmethod
     def dumps_loads(x: T) -> T:
-        return cast(T, json.loads(json.dumps(x)))
+        return cast("T", json.loads(json.dumps(x)))
 
     @staticmethod
     def assert_equal_with_type(
