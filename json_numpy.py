@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-__version__ = "2.1.0"
-__all__ = ["default", "object_hook", "dumps", "loads", "dump", "load", "patch"]
+__version__ = "2.1.1"
+__all__ = ["default", "dump", "dumps", "load", "loads", "object_hook", "patch"]
 
 import json
 from base64 import b64decode, b64encode
